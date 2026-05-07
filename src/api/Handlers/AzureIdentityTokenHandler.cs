@@ -10,7 +10,7 @@ namespace Microsoft.Learn.AzureCosmosDBMongoDBVCoreQuickstart.Api.Handlers;
 /// The Microsoft Entra tenant ID to use for authentication. This is the ID of the Microosft Entra tenant that contains the principal that will be used to authenticate.
 /// </param>
 /// <param name="scopes">
-/// The scopes to request when acquiring the token. This should typically be set to the fixed scope for the Azure Cosmos DB for MongoDB vCore service, which is "https://ossrdbms-aad.database.windows.net/.default".
+/// The scopes to request when acquiring the token. This should typically be set to the fixed scope for the Azure DocumentDB (with MongoDB compatibility) service, which is "https://ossrdbms-aad.database.windows.net/.default".
 /// </param>
 /// <remarks>
 /// This class implements the <see cref="IOidcCallback"/> interface, which is used by the <see cref="MongoDB.Driver"/> to acquire OIDC tokens for authentication.

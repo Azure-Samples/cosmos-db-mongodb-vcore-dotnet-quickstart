@@ -1,12 +1,12 @@
 namespace Microsoft.Learn.AzureCosmosDBMongoDBVCoreQuickstart.Api.Factories;
 
 /// <summary>
-/// Factory for creating MongoDB clients with Microsoft Entra authentication support using the best-practices from Azure Cosmos DB for MongoDB vCore.
+/// Factory for creating MongoDB clients with Microsoft Entra authentication support using the best-practices from Azure DocumentDB (with MongoDB compatibility).
 /// </summary>
 internal sealed class MongoEntraClientFactory
 {
     /// <summary>
-    /// This includes the fixed scope for the Azure Cosmos DB for MongoDB vCore service, which is "https://ossrdbms-aad.database.windows.net/.default".
+    /// This includes the fixed scope for the Azure DocumentDB service, which is "https://ossrdbms-aad.database.windows.net/.default".
     /// </summary>
     private string[] Scopes { get; } = ["https://ossrdbms-aad.database.windows.net/.default"];
 
@@ -14,7 +14,7 @@ internal sealed class MongoEntraClientFactory
     /// Creates a <see cref="IMongoClient"/> client instance with Microsoft Entra authentication support using the provided <see cref="TokenCredential"/>.
     /// </summary>
     /// <param name="endpoint" example="&lt;account-name&gt;.global.mongocluster.cosmos.azure.com">
-    /// The endpoint of the Azure Cosmos DB for MongoDB vCore service. This is tpyically in the format "&lt;account-name&gt;.global.mongocluster.cosmos.azure.com".
+    /// The endpoint of the Azure DocumentDB service. This is tpyically in the format "&lt;account-name&gt;.global.mongocluster.cosmos.azure.com".
     /// </param>
     /// <param name="tenantId">
     /// The Microsoft Entra tenant ID to use for authentication. This is the ID of the Microosft Entra tenant that contains the principal that will be used to authenticate.
@@ -27,8 +27,8 @@ internal sealed class MongoEntraClientFactory
     /// An optional action to configure the <see cref="MongoClientSettings"/> before creating the client. This can be used to set additional options or modify the default settings.
     /// </param>
     /// <remarks>
-    /// The typical credential format for Azure Cosmos DB for MongoDB vCore is "mongodb+srv://&lt;account-name&gt;.global.mongocluster.cosmos.azure.com/?tls=true&amp;authMechanism=MONGODB-OIDC&amp;retrywrites=false&amp;maxIdleTimeMS=120000".
-    /// The <see cref="MongoClientSettings"/> are configured with the recommended settings for Azure Cosmos DB for MongoDB vCore, including TLS, retry writes, and connection idle time from this crdential.
+    /// The typical credential format for Azure DocumentDB is "mongodb+srv://&lt;account-name&gt;.global.mongocluster.cosmos.azure.com/?tls=true&amp;authMechanism=MONGODB-OIDC&amp;retrywrites=false&amp;maxIdleTimeMS=120000".
+    /// The <see cref="MongoClientSettings"/> are configured with the recommended settings for Azure DocumentDB, including TLS, retry writes, and connection idle time from this crdential.
     /// </remarks>
     public IMongoClient CreateMongoClient(
         string endpoint,
@@ -45,7 +45,7 @@ internal sealed class MongoEntraClientFactory
         // Creates a new instance of the MongoClientSettings class using the generated URL.
         MongoClientSettings settings = MongoClientSettings.FromUrl(url);
 
-        // Sets the baseline settings for the MongoDB client as recommended by the Azure Cosmos DB for MongoDB vCore product team.
+        // Sets the baseline settings for the MongoDB client as recommended by the Azure DocumentDB product team.
         settings.UseTls = true;
         settings.RetryWrites = false;
         settings.MaxConnectionIdleTime = TimeSpan.FromMinutes(2);
